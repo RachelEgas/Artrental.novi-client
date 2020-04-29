@@ -8,10 +8,10 @@ const colors = [
 ];
 
 export function getAvatarColor(name) {
-    name = name.substr(0, 6);
+    name = name?.substr(0, 6);
 
     var hash = 0;
-    for (var i = 0; i < name.length; i++) {
+    for (var i = 0; i < name?.length; i++) {
         hash = 31 * hash + name.charCodeAt(i);
     }
     var index = Math.abs(hash % colors.length);

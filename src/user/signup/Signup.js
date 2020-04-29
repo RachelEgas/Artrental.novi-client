@@ -13,10 +13,11 @@ import { Form, Input, Button, notification } from 'antd';
 const FormItem = Form.Item;
 
 class Signup extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            name: {
+            fullname: {
                 value: ''
             },
             username: {
@@ -28,7 +29,7 @@ class Signup extends Component {
             password: {
                 value: ''
             }
-        }
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
@@ -50,10 +51,10 @@ class Signup extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        //event.preventDefault();
 
         const signupRequest = {
-            name: this.state.name.value,
+            fullname: this.state.fullname.value,
             email: this.state.email.value,
             username: this.state.username.value,
             password: this.state.password.value
@@ -61,20 +62,20 @@ class Signup extends Component {
         signup(signupRequest)
             .then(response => {
                 notification.success({
-                    message: 'Rental App',
+                    message: 'Polling App',
                     description: "Thank you! You're successfully registered. Please Login to continue!",
                 });
                 this.props.history.push("/login");
             }).catch(error => {
             notification.error({
-                message: 'Rental App',
+                message: 'Polling App',
                 description: error.message || 'Sorry! Something went wrong. Please try again!'
             });
         });
     }
 
     isFormInvalid() {
-        return !(this.state.name.validateStatus === 'success' &&
+        return !(this.state.fullname.validateStatus === 'success' &&
             this.state.username.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
             this.state.password.validateStatus === 'success'
@@ -86,17 +87,17 @@ class Signup extends Component {
             <div className="signup-container">
                 <h1 className="page-title">Sign Up</h1>
                 <div className="signup-content">
-                    <Form onSubmit={this.handleSubmit} className="signup-form">
+                    <Form onFinish={this.handleSubmit} className="signup-form">
                         <FormItem
                             label="Full Name"
-                            validateStatus={this.state.name.validateStatus}
-                            help={this.state.name.errorMsg}>
+                            validateStatus={this.state.fullname.validateStatus}
+                            help={this.state.fullname.errorMsg}>
                             <Input
                                 size="large"
-                                name="name"
+                                name="fullname"
                                 autoComplete="off"
                                 placeholder="Your full name"
-                                value={this.state.name.value}
+                                value={this.state.fullname.value}
                                 onChange={(event) => this.handleInputChange(event, this.validateName)} />
                         </FormItem>
                         <FormItem label="Username"

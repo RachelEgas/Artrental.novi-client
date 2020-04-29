@@ -63,12 +63,14 @@
 }
 
 .nav-icon {
-    font-size: 20px;
+    font-size: 100px;
+    margin-top: -4px;
 }
 
-/*.poll-icon {*/
-/*    margin-top: -4px;*/
-/*}*/
+.anticon  {
+    font-size: 20px!important;
+    margin-left:10px!important;
+}
 
 @media (max-width: 768px) {
     .app-title a {

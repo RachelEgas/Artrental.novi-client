@@ -9,8 +9,6 @@ import {
 import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
-// import PollList from '../poll/PollList';
-// import NewPoll from '../poll/NewPoll';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -20,6 +18,8 @@ import LoadingIndicator from '../common/LoadingIndicator';
 import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
+import ArtList from "../art/ArtList";
+import NewArt from "../art/NewArt";
 const { Content } = Layout;
 
 class App extends Component {
@@ -101,16 +101,21 @@ class App extends Component {
           <Content className="app-content">
             <div className="container">
               <Switch>
-                <Route path="/signup" component={Signup}>
-                </Route>
+
+                  <Route exact path="/"
+                         render={ (props) => <ArtList isAuthenticated={this.state.isAuthenticated}
+                                                     currentUser={this.props.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                  </Route>
+
+                <Route path="/login"
+                       render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
+                <Route path="/signup" component={Signup}></Route>
                 <Route path="/users/:username"
                        render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <Route path={this.props.currentUser ? "/login" : ""}//path="/login"
-                    render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
-                </Route>
-                <Route component={NotFound}>
-                </Route>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/art/new" component={NewArt} handleLogout={this.handleLogout}></PrivateRoute>
+                <Route component={NotFound}></Route>
+
               </Switch>
             </div>
           </Content>

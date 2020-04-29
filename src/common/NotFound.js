@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './NotFound.css';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Button } from 'antd';
-import Login from "../user/login/Login";
 
 class NotFound extends Component {
     render() {
