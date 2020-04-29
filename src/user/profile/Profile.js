@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PollList from '../../poll/PollList';
+import ArtList from '../../art/ArtList.js';
 import { getUserProfile } from '../../util/APIUtils';
 import { Avatar, Tabs } from 'antd';
 import { getAvatarColor } from '../../util/Colors';
@@ -82,32 +82,32 @@ class Profile extends Component {
                         <div className="user-profile">
                             <div className="user-details">
                                 <div className="user-avatar">
-                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.name)}}>
-                                        {this.state.user.name[0].toUpperCase()}
+                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.fullname)}}>
+                                        {this.state.user.fullname.slice(0,1).toUpperCase()}
                                     </Avatar>
                                 </div>
                                 <div className="user-summary">
-                                    <div className="full-name">{this.state.user.name}</div>
+                                    <div className="full-name">{this.state.user.fullname}</div>
                                     <div className="username">@{this.state.user.username}</div>
                                     <div className="user-joined">
                                         Joined {formatDate(this.state.user.joinedAt)}
                                     </div>
                                 </div>
                             </div>
-{/*                            <div className="user-poll-details">
+                            <div className="user-poll-details">
                                 <Tabs defaultActiveKey="1"
                                       animated={false}
                                       tabBarStyle={tabBarStyle}
                                       size="large"
                                       className="profile-tabs">
-                                    <TabPane tab={`${this.state.user.pollCount} Polls`} key="1">
-                                        <PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />
+                                    <TabPane tab={`${this.state.user.artCount} Art`} key="1">
+                                        <ArtList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} type="USER_CREATED_ART" />
                                     </TabPane>
-                                    <TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">
-                                        <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
-                                    </TabPane>
+                                    {/*<TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">*/}
+                                    {/*    <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />*/}
+                                    {/*</TabPane>*/}
                                 </Tabs>
-                            </div>*/}
+                            </div>
                         </div>
                     ): null
                 }

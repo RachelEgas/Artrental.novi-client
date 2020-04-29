@@ -4,8 +4,9 @@ import {
     withRouter
 } from 'react-router-dom';
 import './AppHeader.css';
-// import pollIcon from '../poll.svg';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import artIcon from '../poll.svg';
+import { Layout, Menu, Dropdown } from 'antd';
+import {CaretDownOutlined, UserOutlined, HomeOutlined, PlusOutlined} from "@ant-design/icons";
 const Header = Layout.Header;
 
 class AppHeader extends Component {
@@ -24,9 +25,14 @@ class AppHeader extends Component {
         let menuItems;
         if(this.props.currentUser) {
             menuItems = [
-                <Menu.Item key="/addArt">
+                <Menu.Item key="/">
                     <Link to="/">
-                        <Icon type="home" className="nav-icon" />
+                        <HomeOutlined className="nav-icon"/>
+                    </Link>
+                </Menu.Item>,
+                <Menu.Item key="/art/new">
+                    <Link to="/art/new">
+                        <PlusOutlined />
                     </Link>
                 </Menu.Item>,
                 <Menu.Item key="/profile" className="profile-menu">
@@ -70,7 +76,7 @@ function ProfileDropdownMenu(props) {
         <Menu onClick={props.handleMenuClick} className="profile-dropdown-menu">
             <Menu.Item key="user-info" className="dropdown-item" disabled>
                 <div className="user-full-name-info">
-                    {props.currentUser.name}
+                    {props.currentUser.fullname}
                 </div>
                 <div className="username-info">
                     @{props.currentUser.username}
@@ -91,12 +97,10 @@ function ProfileDropdownMenu(props) {
             overlay={dropdownMenu}
             trigger={['click']}
             getPopupContainer = { () => document.getElementsByClassName('profile-menu')[0]}>
-            <a className="ant-dropdown-link">
-                <Icon type="user" className="nav-icon" style={{marginRight: 0}} /> <Icon type="down" />
+            <a className="ant-dropdown-link Icon" href="/">
+                <UserOutlined className="nav-icon" /><CaretDownOutlined/>
             </a>
         </Dropdown>
     );
 }
-
-
 export default withRouter(AppHeader);

@@ -4,7 +4,7 @@ import './Login.css';
 import { Link } from 'react-router-dom';
 import { ACCESS_TOKEN } from '../../constants';
 
-import { Form, Input, Button, Icon, notification } from 'antd';
+import {Form, Input, Button, notification, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -27,10 +27,7 @@ class LoginForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
+    handleSubmit = values => {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
                     .then(response => {
@@ -49,8 +46,6 @@ class LoginForm extends Component {
                         });
                     }
                 });
-            }
-        });
     }
 
     render() {
@@ -79,6 +74,4 @@ class LoginForm extends Component {
         );
     }
 }
-
-
 export default Login;

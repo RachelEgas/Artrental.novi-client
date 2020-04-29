@@ -1,4 +1,4 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import {API_BASE_URL, ACCESS_TOKEN, ART_LIST_SIZE} from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -23,31 +23,23 @@ const request = (options) => {
         );
 };
 
-// export function getAllPolls(page, size) {
-//     page = page || 0;
-//     size = size || POLL_LIST_SIZE;
-//
-//     return request({
-//         url: API_BASE_URL + "/polls?page=" + page + "&size=" + size,
-//         method: 'GET'
-//     });
-// }
+export function getAllArt(page, size) {
+    page = page || 0;
+    size = size || ART_LIST_SIZE;
 
-// export function createPoll(pollData) {
-//     return request({
-//         url: API_BASE_URL + "/polls",
-//         method: 'POST',
-//         body: JSON.stringify(pollData)
-//     });
-// }
+    return request({
+        url: API_BASE_URL + "/art?page=" + page + "&size=" + size,
+        method: 'GET'
+    });
+}
 
-// export function castVote(voteData) {
-//     return request({
-//         url: API_BASE_URL + "/polls/" + voteData.pollId + "/votes",
-//         method: 'POST',
-//         body: JSON.stringify(voteData)
-//     });
-// }
+export function createArt(artData) {
+    return request({
+        url: API_BASE_URL + "/polls",
+        method: 'POST',
+        body: JSON.stringify(artData)
+    });
+}
 
 export function login(loginRequest) {
     return request({
@@ -98,22 +90,12 @@ export function getUserProfile(username) {
     });
 }
 
-export function getUserCreatedPolls(username, page, size) {
+export function getUserCreatedArt(username, page, size) {
     page = page || 0;
-    size = size || POLL_LIST_SIZE;
+    size = size || ART_LIST_SIZE;
 
     return request({
-        url: API_BASE_URL + "/users/" + username + "/polls?page=" + page + "&size=" + size,
+        url: API_BASE_URL + "/users/" + username + "/art?page=" + page + "&size=" + size,
         method: 'GET'
     });
 }
-
-// export function getUserVotedPolls(username, page, size) {
-//     page = page || 0;
-//     size = size || POLL_LIST_SIZE;
-//
-//     return request({
-//         url: API_BASE_URL + "/users/" + username + "/votes?page=" + page + "&size=" + size,
-//         method: 'GET'
-//     });
-// }
