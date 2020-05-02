@@ -13,11 +13,37 @@
 
 .art-title {
     font-weight: 500;
-    font-size: 21px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 0.85);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+}
+.art-price{
+    font-weight: 500;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 5px;
+}
+.art-header{
+    -moz-column-count: 2;
+    -moz-column-gap: 30%;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 30%;
+    column-count: 2;
+    column-gap: 30%;
+}
+.art-header div{
+    max-height: 140px;
+    margin: 2px;
+}
+.art-img{
+    height: 95px;
+    float: right;
 }
 
+#art-img{
+    max-height: 95px;
+    max-width: 100px;
+}
 @media (max-width: 768px) {
     .art-title {
         font-size: 18px;
