@@ -35,7 +35,7 @@ export function getAllArt(page, size) {
 
 export function createArt(artData) {
     return request({
-        url: API_BASE_URL + "/polls",
+        url: API_BASE_URL + "/art/create",
         method: 'POST',
         body: JSON.stringify(artData)
     });

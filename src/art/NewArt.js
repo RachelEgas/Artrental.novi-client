@@ -19,9 +19,7 @@ class NewArt extends Component {
             description: {
                 text: ''
             },
-            rentalPrice: {
-                float: 0.00
-            },
+            rentalPrice: 0.00,
             artImage: {
                 string: ''
             }
@@ -36,7 +34,6 @@ class NewArt extends Component {
     }
 
     handleSubmitArt(event) {
-        event.preventDefault();
         const artData = {
             title: this.state.title.text,
             rentalPrice: this.state.rentalPrice,
@@ -102,38 +99,35 @@ class NewArt extends Component {
     handlePriceChange(event){
         const price = event.target.value;
         this.setState({
-            description: {
-                string: price
-            }
+            rentalPrice: price
         });
     }
 
     handleImageChange(event){
-        let selectedFile = event.target.files;
-        let file = null;
-        //let fileName = "";
-        //Check File is not Empty
-        if (selectedFile.length > 0) {
-            // Select the very first file from list
-            let fileToLoad = selectedFile[0];
-            //fileName = fileToLoad.name;
-            // FileReader function for read the file.
-            let fileReader = new FileReader();
-            // Onload of file read the file content
-            fileReader.onload = function(fileLoadedEvent) {
-                file = fileLoadedEvent.target.result;
-                // Print data in console
-                console.log(file);
-            };
-            // Convert data to base64
-            fileReader.readAsDataURL(fileToLoad);
-        }
+        const inputFile = event.target.files[0];
 
-        this.setState({
-            artImage:{
-                string: file
+        const prom = new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.onerror = () => {
+                reject("Err")
             }
+            fileReader.onload = () => {
+
+                // File data loaded, so proceed to call setState
+                if (fileReader.result != undefined){
+                    resolve(this.setState({
+                        artImage: {
+                            string: fileReader.result
+                        }
+                    }), () => {});
+                }else{
+                    reject("Err")
+                }
+            }
+            fileReader.readAsDataURL(inputFile)
         });
+
+
     }
 
     isFormInvalid() {
@@ -148,7 +142,7 @@ class NewArt extends Component {
             <div className="new-art-container">
                 <h1 className="page-title">Create Art</h1>
                 <div className="new-art-content">
-                    <Form onSubmit={this.handleSubmitArt} className="create-art-form">
+                    <Form onFinish={this.handleSubmitArt} className="create-art-form">
                         <FormItem validateStatus={this.state.title.validateStatus}
                                   help={this.state.title.errorMsg} className="art-form-row">
                             <TextArea
@@ -172,19 +166,20 @@ class NewArt extends Component {
                         <FormItem help={this.state.rentalPrice.errorMsg} className="art-form-row">
                         <input
                             type='number'
-                            step="0.1"
+                            step="0.10"
                             placeholder="Enter price here"
                             style = {{ fontSize: '16px' }}
                             min='0'
                             max='200'
                             className='ant-form-item-control-input'
                             name = "price er month"
-                            value = {this.state.rentalPrice.value}
+                            value = {this.state.rentalPrice}
                             onChange = {this.handlePriceChange}/>
                     </FormItem>
-                        <FormItem help={this.state.rentalPrice.errorMsg} className="art-form-row">
+                        <FormItem help={this.state.artImage.errorMsg} className="art-form-row">
                             <input
                                 type='file'
+                                accept='image/png,image/jpg,image/jpeg'
                                 onChange={this.handleImageChange}
                                 ref={fileInput => this.fileInput = fileInput}
                                 style={{display: 'none'}}/>

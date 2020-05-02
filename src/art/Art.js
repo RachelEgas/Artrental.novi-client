@@ -33,6 +33,12 @@ class Art extends Component {
                     <div className="art-title">
                         {this.props.art.title}
                     </div>
+                    <div className="art-price">
+                        {'€ ' + this.props.art.rentalPrice.toFixed(2) + ' p/mth'}
+                    </div>
+                    <div className={'pull-right art-img'}>
+                        <img id="art-img" src={'data:image/jpg;base64,'+ this.props.art.artImage}/>
+                    </div>
                 </div>
                 <div className="art-footer">
                 </div>
