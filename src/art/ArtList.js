@@ -94,7 +94,8 @@ class ArtList extends Component {
         this.state.arts.forEach((art, artIndex) => {
             artViews.push(<Art
                 key={art.id}
-                art={art} />)
+                art={art}
+                profilePage={ this.props.type === 'USER_CREATED_ART' }/>)
         });
 
         return (

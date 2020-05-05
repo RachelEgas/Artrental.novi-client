@@ -99,3 +99,11 @@ export function getUserCreatedArt(username, page, size) {
         method: 'GET'
     });
 }
+
+export function rentArt(rentData){
+    return request({
+        url: API_BASE_URL + "/art/rent",
+        method: 'POST',
+        body: JSON.stringify(rentData)
+    });
+}
