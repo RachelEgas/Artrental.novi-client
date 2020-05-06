@@ -36,14 +36,27 @@
     margin: 2px;
 }
 .art-img{
+    position: relative;
     height: 95px;
     float: right;
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+    padding: 0;
 }
 
 #art-img{
     max-height: 95px;
     max-width: 100px;
 }
+
+#art-img:hover {
+    transform: scale(2);
+    position: relative;
+    z-index: 2;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .art-title {
         font-size: 18px;
@@ -104,4 +117,19 @@
     color: #657786;
     font-size: 13px;
     margin-top: 2px;
+}
+
+.rent-art-form-button {
+    width: 100%;
+}
+
+.rent-form-row {
+    padding-top: 20px;
+}
+
+.rent-art-form-button[disabled], .rent-part-form-button[disabled]:hover, .rent-art-form-button[disabled]:focus {
+    opacity: 0.6;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
 }

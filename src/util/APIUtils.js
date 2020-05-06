@@ -41,6 +41,14 @@ export function createArt(artData) {
     });
 }
 
+export function rentArt(rentData){
+    return request({
+        url: API_BASE_URL + "/rent/create",
+        method: 'POST',
+        body: JSON.stringify(rentData)
+    });
+}
+
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/signin",
@@ -71,7 +79,6 @@ export function checkEmailAvailability(email) {
     });
 }
 
-
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -96,6 +103,13 @@ export function getUserCreatedArt(username, page, size) {
 
     return request({
         url: API_BASE_URL + "/users/" + username + "/art?page=" + page + "&size=" + size,
+        method: 'GET'
+    });
+}
+
+export function getMollieKey(){
+    return request({
+        url:API_BASE_URL+"rent/mollie_key",
         method: 'GET'
     });
 }

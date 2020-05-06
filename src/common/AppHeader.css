@@ -86,3 +86,7 @@
         margin: 0 -15px;
     }
 }
+.ant-form-item-explain div{
+    color: red;
+    font-weight: 500;
+}

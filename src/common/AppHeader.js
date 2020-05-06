@@ -4,7 +4,6 @@ import {
     withRouter
 } from 'react-router-dom';
 import './AppHeader.css';
-import artIcon from '../poll.svg';
 import { Layout, Menu, Dropdown } from 'antd';
 import {CaretDownOutlined, UserOutlined, HomeOutlined, PlusOutlined} from "@ant-design/icons";
 const Header = Layout.Header;
