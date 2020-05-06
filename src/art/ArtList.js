@@ -1,11 +1,11 @@
 import {ART_LIST_SIZE} from "../constants";
 import {getAllArt, getUserCreatedArt} from "../util/APIUtils";
 import React, { Component } from 'react';
-import LoadingIndicator from "../common/LoadingIndicator";
 import {Button, Icon} from 'antd';
 import Art from './Art';
 import {Link, withRouter} from "react-router-dom";
 import './ArtList.css';
+import LoadingIndicator from "../common/LoadingIndicator";
 
 class ArtList extends Component {
     constructor(props) {
