@@ -91,6 +91,9 @@
     line-height: 48px;
     border-radius: 24px;
 }
+.art-creator-avatar:hover{
+    cursor: pointer;
+}
 
 .art-creator-avatar > * {
     line-height: 48px;
@@ -120,9 +123,9 @@
 }
 
 .rent-art-form-button {
-    width: 100%;
+    width: 80%;
+    display: inline-block;
 }
-
 .rent-form-row {
     padding-top: 20px;
 }

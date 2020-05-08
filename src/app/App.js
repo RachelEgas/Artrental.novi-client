@@ -20,6 +20,7 @@ import PrivateRoute from '../common/PrivateRoute';
 import { Layout, notification } from 'antd';
 import ArtList from "../art/ArtList";
 import NewArt from "../art/NewArt";
+import AfterPayment from "../common/AfterPayment";
 const { Content } = Layout;
 
 class App extends Component {
@@ -114,8 +115,8 @@ class App extends Component {
                        render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/art/new" component={NewArt} handleLogout={this.handleLogout}></PrivateRoute>
+                <Route path="/afterpayment" component={AfterPayment}/>
                 <Route component={NotFound}></Route>
-
               </Switch>
             </div>
           </Content>

@@ -41,7 +41,7 @@ export function createArt(artData) {
     });
 }
 
-export function rentArt(rentData){
+export function createRent(rentData){
     return request({
         url: API_BASE_URL + "/rent/create",
         method: 'POST',
