@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import './Art.css';
 import {Avatar, Button, Form, notification} from 'antd';
 import { Link } from 'react-router-dom';
-import { getAvatarColor } from '../util/Colors';
 import { formatDateTime } from '../util/Helpers';
-import {rentArt} from "../util/APIUtils";
+import {createRent} from "../util/APIUtils";
 import {MAX_RENTAL_PERIOD, MIN_RENTAL_PERIOD} from "../constants";
+import {QuestionCircleOutlined} from "@ant-design/icons";
 const FormItem = Form.Item;
 class Art extends Component {
     constructor(props) {
@@ -30,9 +30,11 @@ class Art extends Component {
             payed: false
         };
 
-        rentArt(rentData)
+        createRent(rentData)
             .then(response => {
-                this.props.history.push("/");
+                const redirectUrl = response.redirectUrl;
+                window.location.href = redirectUrl;
+                // this.props.history.push("/");
             }).catch(error => {
             if(error.status === 401) {
                 this.props.handleLogout('/login', 'error', 'You have been logged out. Please login create art.');
@@ -87,7 +89,8 @@ class Art extends Component {
                 <div className="art-header">
                     <Form onFinish={this.handleSubmitRent} className="create-art-form">
                     <div className="art-creator-info">
-                        <Avatar className="art-creator-avatar"
+                        <Avatar title={this.state.art.inRental ? "Art is in rental" : "Art is available for rental" }
+                                className="art-creator-avatar"
                                 style={{ backgroundColor: this.state.art.inRental ? '#F44336' : '#1DA57A'}} >
                             {this.state.art.inRental ? 'R' : 'A' }
                         </Avatar>
@@ -129,6 +132,7 @@ class Art extends Component {
                                             value = {this.state.period.number}
                                             onChange = {this.handlePeriodChange}/>
                                     </FormItem>
+
                                     <Button type="primary"
                                         htmlType="submit"
                                         size="small"
@@ -136,7 +140,12 @@ class Art extends Component {
                                         className="rent-art-form-button">
                                         Rent this
                                     </Button>
-                                </div>: null// in rental until: { datetime }
+                                    <QuestionCircleOutlined style={{fontSize: '10px'}}
+                                                            theme="outlined"
+                                                            className="tooltip"
+                                                            title="After clicking the button, you will be redirected. It's only possible to pay with IDEAL." />
+
+                                    </div>: null // in rental until: { datetime }
                             : null
                         }
                     </Form>

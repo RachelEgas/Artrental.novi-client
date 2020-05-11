@@ -94,7 +94,7 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="user-poll-details">
+                            <div className="user-art-details">
                                 <Tabs defaultActiveKey="1"
                                       animated={false}
                                       tabBarStyle={tabBarStyle}
@@ -103,9 +103,9 @@ class Profile extends Component {
                                     <TabPane tab={`${this.state.user.artCount} Art`} key="1">
                                         <ArtList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} type="USER_CREATED_ART" />
                                     </TabPane>
-                                    {/*<TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">*/}
-                                    {/*    <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />*/}
-                                    {/*</TabPane>*/}
+                                    <TabPane tab={`${this.state.user.rentCount} Orders`}  key="2">
+                                        {/*<PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />*/}
+                                    </TabPane>
                                 </Tabs>
                             </div>
                         </div>
