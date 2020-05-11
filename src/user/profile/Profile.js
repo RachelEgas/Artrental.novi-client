@@ -94,7 +94,7 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="user-poll-details">
+                            <div className="user-art-details">
                                 <Tabs defaultActiveKey="1"
                                       animated={false}
                                       tabBarStyle={tabBarStyle}
