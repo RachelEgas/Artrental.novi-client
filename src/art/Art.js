@@ -8,6 +8,7 @@ import {createRent} from "../util/APIUtils";
 import {MAX_RENTAL_PERIOD, MIN_RENTAL_PERIOD} from "../constants";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 const FormItem = Form.Item;
+
 class Art extends Component {
     constructor(props) {
         super(props);
@@ -94,7 +95,7 @@ class Art extends Component {
                                 style={{ backgroundColor: this.state.art.inRental ? '#F44336' : '#1DA57A'}} >
                             {this.state.art.inRental ? 'R' : 'A' }
                         </Avatar>
-                        <Link className="creator-link" to={`/users/${this.state.art.createdBy.username}`}>
+                        <div className="creator-link" >
                             <span className="art-creator-name">
                                 {this.state.art.createdBy.fullname}
                             </span>
@@ -102,9 +103,9 @@ class Art extends Component {
                                 @{this.state.art.createdBy.username}
                             </span>
                             <span className="art-creation-date">
-                                {formatDateTime(this.state.art.creationDateTime)}
+                                {formatDateTime(this.state.art.creationDateTime, true)}
                             </span>
-                        </Link>
+                        </div>
                     </div>
                     <div className="art-title">
                         {this.state.art.title}

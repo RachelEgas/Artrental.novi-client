@@ -1,29 +1,29 @@
-.arts-container {
+.rents-container {
     max-width: 600px;
     margin: 0 auto;
     margin-top: 20px;
 }
 
-.art-content {
+.rent-content {
     margin-bottom: 30px;
     padding: 20px 15px 20px 15px;
     letter-spacing: .01em;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
 }
 
-.art-title {
+.rent-period {
     font-weight: 500;
     font-size: 15px;
     color: rgba(0, 0, 0, 0.85);
     margin-bottom: 5px;
 }
-.art-price{
+.rent-total-price{
     font-weight: 500;
     font-size: 15px;
     color: rgba(0, 0, 0, 0.85);
     margin-bottom: 5px;
 }
-.art-header{
+.rent-header{
     -moz-column-count: 2;
     -moz-column-gap: 30%;
     -webkit-column-count: 2;
@@ -31,34 +31,13 @@
     column-count: 2;
     column-gap: 30%;
 }
-.art-header div{
+.rent-header div{
     max-height: 140px;
     margin: 2px;
 }
-.art-img{
-    position: relative;
-    height: 95px;
-    float: right;
-    transition: transform .2s; /* Animation */
-    margin: 0 auto;
-    padding: 0;
-}
-
-#art-img{
-    max-height: 95px;
-    max-width: 100px;
-}
-
-#art-img:hover {
-    transform: scale(2);
-    position: relative;
-    z-index: 2;
-    border: 2px solid black;
-    cursor: pointer;
-}
 
 @media (max-width: 768px) {
-    .art-title {
+    .rent-period {
         font-size: 18px;
     }
 }
@@ -69,13 +48,13 @@
     color: #8899A6;
 }
 
-.art-creator-info .creator-link {
+.rent-info .rental {
     display: block;
-    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-.art-creator-avatar {
+
+.rent-avatar {
     float: left;
     margin-top: 3px;
     margin-left: -58px;
@@ -85,16 +64,13 @@
     line-height: 48px;
     border-radius: 24px;
 }
-.art-creator-avatar:hover{
-    cursor: help;
-}
 
-.art-creator-avatar > * {
+.rent-avatar > * {
     line-height: 48px;
     font-size: 18px;
 }
 
-.art-creator-name {
+.rent-art-title {
     font-size: 16px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);
@@ -103,13 +79,13 @@
     margin-right: 8px;
 }
 
-.art-creator-username {
+.rent-art-description {
     color: #657786;
     font-size: 15px;
     display: inline-block;
 }
 
-.art-creation-date {
+.rent-creation-date {
     display: block;
     color: #657786;
     font-size: 13px;
@@ -122,11 +98,4 @@
 }
 .rent-form-row {
     padding-top: 20px;
-}
-
-.rent-art-form-button[disabled], .rent-part-form-button[disabled]:hover, .rent-art-form-button[disabled]:focus {
-    opacity: 0.6;
-    color: #fff;
-    background-color: #1890ff;
-    border-color: #1890ff;
 }
