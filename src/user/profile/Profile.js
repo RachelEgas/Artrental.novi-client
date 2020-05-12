@@ -18,7 +18,7 @@ class Profile extends Component {
         this.state = {
             user: null,
             isLoading: false
-        }
+        };
         this.loadUserProfile = this.loadUserProfile.bind(this);
     }
 
@@ -105,9 +105,13 @@ class Profile extends Component {
                                       tabBarStyle={tabBarStyle}
                                       size="large"
                                       className="profile-tabs">
-                                    <TabPane tab={`${this.state.user.artCount} Art`} key="1">
-                                        <ArtList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} type="USER_CREATED_ART" />
-                                    </TabPane>
+                                    {this.props.currentUser.roles.find(item => item.name === 'ROLE_STAFF') ?
+                                        <TabPane tab={`${this.state.user.artCount} Art`} key="1">
+                                            <ArtList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} type="USER_CREATED_ART" />
+                                        </TabPane>
+                                        : null
+                                    }
+
                                     <TabPane tab={`${this.state.user.rentCount} Orders`}  key="2">
                                         <RentList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} />
                                     </TabPane>
