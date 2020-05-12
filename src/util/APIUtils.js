@@ -1,4 +1,4 @@
-import {API_BASE_URL, ACCESS_TOKEN, ART_LIST_SIZE} from '../constants';
+import {API_BASE_URL, ACCESS_TOKEN, PAGE_LIST_SIZE} from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -25,7 +25,7 @@ const request = (options) => {
 
 export function getAllArt(page, size) {
     page = page || 0;
-    size = size || ART_LIST_SIZE;
+    size = size || PAGE_LIST_SIZE;
 
     return request({
         url: API_BASE_URL + "/art?page=" + page + "&size=" + size,
@@ -99,10 +99,20 @@ export function getUserProfile(username) {
 
 export function getUserCreatedArt(username, page, size) {
     page = page || 0;
-    size = size || ART_LIST_SIZE;
+    size = size || PAGE_LIST_SIZE;
 
     return request({
         url: API_BASE_URL + "/users/" + username + "/art?page=" + page + "&size=" + size,
+        method: 'GET'
+    });
+}
+
+export function getUserOrders (username, page, size) {
+    page = page || 0;
+    size = size || PAGE_LIST_SIZE;
+
+    return request({
+        url: API_BASE_URL + "/users/" + username + "/rent?page=" + page + "&size=" + size,
         method: 'GET'
     });
 }

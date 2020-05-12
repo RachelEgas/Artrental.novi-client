@@ -14,7 +14,7 @@ export function formatDate(dateString) {
     return monthNames[monthIndex] + ' ' + year;
 }
 
-export function formatDateTime(dateTimeString) {
+export function formatDateTime(dateTimeString, inclTime) {
     const date = new Date(dateTimeString);
 
     const monthNames = [
@@ -25,6 +25,9 @@ export function formatDateTime(dateTimeString) {
 
     const monthIndex = date.getMonth();
     const year = date.getFullYear();
-
-    return date.getDate() + ' ' + monthNames[monthIndex] + ' ' + year + ' - ' + date.getHours() + ':' + date.getMinutes();
+    let datetime = date.getDate() + ' ' + monthNames[monthIndex] + ' ' + year;
+    if(inclTime){
+        datetime += ' - ' + date.getHours() + ':' + date.getMinutes();
+    }
+    return datetime;
 }

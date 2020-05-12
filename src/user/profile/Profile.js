@@ -8,6 +8,7 @@ import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
+import RentList from "../../rent/RentList";
 
 const TabPane = Tabs.TabPane;
 
@@ -48,13 +49,17 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        const username = this.props.match.params.username;
-        this.loadUserProfile(username);
+        if(this.props.isAuthenticated) {
+            const username = this.props.match.params.username;
+            this.loadUserProfile(username);
+        }
     }
 
     componentDidUpdate(nextProps) {
-        if(this.props.match.params.username !== nextProps.match.params.username) {
-            this.loadUserProfile(nextProps.match.params.username);
+        if(this.props.isAuthenticated !== nextProps.isAuthenticated) {
+            if (this.props.match.params.username !== nextProps.match.params.username) {
+                this.loadUserProfile(nextProps.match.params.username);
+            }
         }
     }
 
@@ -104,7 +109,7 @@ class Profile extends Component {
                                         <ArtList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} type="USER_CREATED_ART" />
                                     </TabPane>
                                     <TabPane tab={`${this.state.user.rentCount} Orders`}  key="2">
-                                        {/*<PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />*/}
+                                        <RentList username={this.props.match.params.username} isAuthenticated={this.props.isAuthenticated} />
                                     </TabPane>
                                 </Tabs>
                             </div>

@@ -1,18 +1,17 @@
+import React, {Component} from "react";
+import Rent from "./Rent";
 import {PAGE_LIST_SIZE} from "../constants";
-import {getAllArt, getUserCreatedArt} from "../util/APIUtils";
-import React, { Component } from 'react';
-import {Button} from 'antd';
-import Art from './Art';
-import {Link, withRouter} from "react-router-dom";
-import './ArtList.css';
+import {getUserOrders} from "../util/APIUtils";
+import {Button} from "antd";
 import LoadingIndicator from "../common/LoadingIndicator";
+import {Link} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
-
-class ArtList extends Component {
+import './RentList.css'
+class RentList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            arts: [],
+            rents: [],
             page: 0,
             size: 10,
             totalElements: 0,
@@ -20,21 +19,17 @@ class ArtList extends Component {
             last: true,
             isLoading: false
         };
-        this.loadArtList = this.loadArtList.bind(this);
+        this.loadRentList = this.loadRentList.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
     }
 
-    loadArtList(page = 0, size = PAGE_LIST_SIZE) {
-        let promise;
+    loadRentList(page = 0, size = PAGE_LIST_SIZE) {
+        let rentListPromise;
         if(this.props.username) {
-            if(this.props.type === 'USER_CREATED_ART') {
-                promise = getUserCreatedArt(this.props.username, page, size);
-            }
-        } else {
-            promise = getAllArt(page, size);
-        }
+            rentListPromise = getUserOrders(this.props.username, page, size);
+        };
 
-        if(!promise) {
+        if(!rentListPromise) {
             return;
         }
 
@@ -42,12 +37,12 @@ class ArtList extends Component {
             isLoading: true
         });
 
-        promise
+        rentListPromise
             .then(response => {
-                const arts = this.state.arts.slice();
+                const rents = this.state.rents.slice();
 
                 this.setState({
-                    arts: arts.concat(response.content),
+                    rents: rents.concat(response.content),
                     page: response.page,
                     size: response.size,
                     totalElements: response.totalElements,
@@ -66,7 +61,7 @@ class ArtList extends Component {
     componentDidMount() {
         if(this.props.isAuthenticated)
         {
-            this.loadArtList();
+            this.loadRentList();
         }
     }
 
@@ -74,7 +69,7 @@ class ArtList extends Component {
         if(this.props.isAuthenticated !== nextProps.isAuthenticated) {
             // Reset State
             this.setState({
-                arts: [],
+                rents: [],
                 page: 0,
                 size: 10,
                 totalElements: 0,
@@ -82,37 +77,34 @@ class ArtList extends Component {
                 last: true,
                 isLoading: false
             });
-            this.loadArtList();
+            this.loadRentList();
         }
     }
 
     handleLoadMore() {
-        this.loadArtList(this.state.page + 1);
+        this.loadRentList(this.state.page + 1);
     }
 
     render() {
-        const artViews = [];
-        this.state.arts.forEach((art, artIndex) => {
-            artViews.push(<Art
-                key={art.id}
-                art={art}
-                profilePage={ this.props.type === 'USER_CREATED_ART' }/>)
+        const rentViews = [];
+        this.state.rents.forEach((rent, artIndex) => {
+            rentViews.push(<Rent
+                key={rent.id}
+                rent={rent}/>)
         });
-
         return (
-            <div className="arts-container">
-
-                {artViews}
+            <div className="rents-container">
+                {rentViews}
                 {
-                    !this.state.isLoading && this.state.arts.length === 0 && this.props.isAuthenticated ? (
-                        <div className="no-art-found">
-                            <span>No art added yet.</span>
+                    !this.state.isLoading && this.state.rents.length === 0 && this.props.isAuthenticated ? (
+                        <div className="no-rents-found">
+                            <span>No art rented yet.</span>
                         </div>
                     ) : null
                 }
                 {
                     !this.state.isLoading && !this.state.last ? (
-                        <div className="load-more-arts">
+                        <div className="load-more-rents">
                             <Button type="dashed" onClick={this.handleLoadMore} disabled={this.state.isLoading}>
                                 <PlusOutlined type="plus" /> Load more
                             </Button>
@@ -124,7 +116,7 @@ class ArtList extends Component {
                 }
                 {
                     !this.props.isAuthenticated ?
-                        (<div className="no-art-found">
+                        (<div className="no-rents-found">
                             <span>Welcome!<br/> Please <Link to="/login">log in</Link> or <Link to="/signup">register now!</Link></span>
                         </div>) : null
                 }
@@ -132,5 +124,4 @@ class ArtList extends Component {
         );
     }
 }
-
-export default withRouter(ArtList);
+export default RentList;
