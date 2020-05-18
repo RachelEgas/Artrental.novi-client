@@ -29,11 +29,12 @@ class AppHeader extends Component {
                         <HomeOutlined className="nav-icon"/>
                     </Link>
                 </Menu.Item>,
+                this.props.currentUser.roles.find(item => item.name === 'ROLE_STAFF') ?
                 <Menu.Item key="/art/new">
                     <Link to="/art/new">
                         <PlusOutlined />
                     </Link>
-                </Menu.Item>,
+                </Menu.Item> : null,
                 <Menu.Item key="/profile" className="profile-menu">
                     <ProfileDropdownMenu
                         currentUser={this.props.currentUser}

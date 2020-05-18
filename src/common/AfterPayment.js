@@ -10,7 +10,8 @@ class AfterPayment extends Component {
                     Succesfully received your order
                 </h1>
                 <div className="desc">
-                    Your rented art is now ready for pick-up at: <br/>
+                    The owner of your rental will be in contact after the payment status is received.
+                    After contact you can pick up your order at: <br/>
                     Hogeschool NOVI<br/>
                     Zonnebaan 9<br/>
                     3542EA Utrecht
